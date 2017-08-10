@@ -1,34 +1,60 @@
 
+//Back End
+var isNotATriangle = function(side1, side2, side3) {
+  if ((side1 + side2) <= side3) {
+    return true;
+  } else if ((side2 + side3) <= side1) {
+    return true;
+  } else if ((side1 + side3) <= side2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+var isEquilateral = function(side1, side2, side3) {
+  if (side1 === side2 && side2 === side3) {
+  return true;
+  } else {
+  return false;
+  }
+}
+
+var isIsosceles = function(side1, side2, side3) {
+  if (side1 === side2 || side2 === side3) {
+    return true;
+  } else if (side1 === side3){
+    return true;
+  }
+}
+
+var isScalene = function(side1, side2, side3) {
+  if (side1 != side2 || side2 != side3) {
+    return true;
+  } else if (side1 != side3) {
+    return true;
+  }
+}
+
+
+//Front End
 $(document).ready(function(){
-  $("form#celebrityquiz").submit(function(){
-    var age = parseInt($("input#age").val());
-    var music = $("select#music").val();
-    var gender = $("select#gender").val();
+  $("form#form").submit(function(event){
+    var side1 = parseInt($("input#side1")).val();
+    var side2 = parseInt($("input#side2")).val();
+    var side3 = parseInt($("input#side3")).val();
 
-      if (age) {
-        if (age > 50) {
-          $('#mozart').show();
-        }
-        if (age < 50) {
-          $('#bono').show();
-        }
-        if (music === "Rock" && age < 35){
-          $('#shakira').show();
-        }
-        if (music === "Electro/House" && age < 25) {
-          $('#rezz').show();
-          $('#bono').hide();
-        }
-        if (music === "R&B" && gender === "Male"){
-          $('#shakira').show();
-        }
-        if (music === "R&B" && gender === "Female"){
-          $('#tupac').show();
-        }
-      } else {
-        alert ('Please enter your age.');
-      }
+    if (isNotATriangle(side1, side2, side3)) {
+      alert('this is not a triangle');
+    }
 
+    if (isEquilateral(side1, side2, side3)) {
+      $('#equilateral').show();
+    }
+
+    if (isScalene(side1, side2, side3)) {
+      $('#scalene').show();
+    }
 
     event.preventDefault();
   });
